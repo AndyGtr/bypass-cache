@@ -1,0 +1,41 @@
+How to bypass username/password when using a git repo on windows using ssh key:
+
+1. Don't use git clone https://github.com//.git (HTTPS) use git clone git@github.com:/.git (SSH) This will bypass the username/password but requires a passphrase for the .ssh/id_rsa key
+
+2. To bypass the required passphrase every push create a .bashrc file in the user directory (C:\Documents and Settings\user).
+
+Add the code below
+
+env=~/.ssh/agent.env
+
+agent_is_running() { if [ "$SSH_AUTH_SOCK" ]; then # ssh-add returns: # 0 = agent running, has keys # 1 = agent running, no keys # 2 = agent not running ssh-add -l >/dev/null 2>&1 || [ $? -eq 1 ] else false fi }
+
+agent_has_keys() { ssh-add -l >/dev/null 2>&1 }
+
+agent_load_env() { . "$env" >/dev/null }
+
+agent_start() { (umask 077; ssh-agent >"$env") . "$env" >/dev/null }
+
+if ! agent_is_running; then agent_load_env fi
+
+if ! agent_is_running; then agent_start ssh-add elif ! agent_has_keys; then ssh-add fi
+
+unset env
+
+The process will continue to run until you log out, shutdown or kill ssh-agent.
+
+To kill the process, you can either:
+
+Run ssh-agent -k;
+
+or,
+
+Find the PID of ssh-agent with ps, then call kill :
+
+Reference:
+
+https://help.github.com/articles/generating-ssh-keys
+
+https://help.github.com/articles/working-with-ssh-key-passphrases
+
+http://stackoverflow.com/questions/12468353/setting-up-git-and-ssh-and-using-ssh-agent-to-store-password-with-msysgit-on-win

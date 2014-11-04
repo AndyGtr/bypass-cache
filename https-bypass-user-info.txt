@@ -1,0 +1,23 @@
+1. To use this option install a credential helper. Download git-credential-winstore.exe to the git/bin path and execute.
+
+2. 'git help -a | grep credential-' from the resulting list find the helper
+
+3. 'git help credential-foo'
+
+4. If we want a password for https://example.com/foo.git Type:
+
+'protocol=https'
+
+'host=example.com'
+
+'path=foo.git'
+
+'username=bob'
+
+'password=123'
+
+5. Make edits, add, commit and push as normal (no repetative username/password entry required)
+
+Reference:
+
+https://www.kernel.org/pub/software/scm/git/docs/gitcredentials.html (Section: AVOIDING REPETITION)
