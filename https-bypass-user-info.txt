@@ -18,6 +18,8 @@
 
 5. Make edits, add, commit and push as normal (no repetative username/password entry required)
 
+6. A: test
+
 Reference:
 
 https://www.kernel.org/pub/software/scm/git/docs/gitcredentials.html (Section: AVOIDING REPETITION)
