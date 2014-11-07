@@ -18,7 +18,7 @@
 
 5. Make edits, add, commit and push as normal (no repetative username/password entry required)
 
-6. A test
+6. A merging test
 
 Reference:
 
